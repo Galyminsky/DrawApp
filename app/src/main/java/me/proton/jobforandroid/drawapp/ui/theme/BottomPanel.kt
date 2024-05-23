@@ -24,9 +24,8 @@ fun BottomPanel(onClick: (Color) -> Unit) {
             .fillMaxWidth()
             .background(Color.LightGray),
         horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-        ColorList() {
-                color ->
+    ) {
+        ColorList() { color ->
             onClick(color)
         }
     }
