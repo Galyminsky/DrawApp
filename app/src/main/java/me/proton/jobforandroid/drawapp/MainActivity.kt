@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -46,8 +47,8 @@ class MainActivity : ComponentActivity() {
 fun DrawCanvas(colorState: MutableState<Color>) {
 
     val tempPath = Path()
-    val path = remember {
-        mutableStateOf(Path())
+    val pathList = remember {
+        mutableStateListOf(Path())
     }
 
     Canvas(modifier = Modifier
