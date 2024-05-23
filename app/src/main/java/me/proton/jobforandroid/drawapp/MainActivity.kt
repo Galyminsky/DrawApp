@@ -6,8 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
+import me.proton.jobforandroid.drawapp.ui.theme.BottomPanel
 import me.proton.jobforandroid.drawapp.ui.theme.DrawAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +26,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DrawAppTheme {
-                DrawCanvas()
+                Column {
+                    DrawCanvas()
+                    BottomPanel()
+                }
             }
         }
     }
@@ -39,7 +44,9 @@ fun DrawCanvas() {
         mutableStateOf(Path())
     }
 
-    Canvas(modifier = Modifier.fillMaxSize()
+    Canvas(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight(0.75f)
         .pointerInput(true) {
             detectDragGestures { change, dragAmount ->
                 tempPath.moveTo(
