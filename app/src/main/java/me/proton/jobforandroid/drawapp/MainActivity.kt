@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -25,10 +26,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val colorState = remember {
+                mutableStateOf(Color.Red)
+            }
             DrawAppTheme {
                 Column {
-                    DrawCanvas()
-                    BottomPanel()
+                    DrawCanvas(colorState)
+                    BottomPanel() {
+                        color -> colorState.value = color
+                    }
                 }
             }
         }
@@ -37,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun DrawCanvas() {
+fun DrawCanvas(colorState: MutableState<Color>) {
 
     val tempPath = Path()
     val path = remember {
@@ -67,7 +73,7 @@ fun DrawCanvas() {
     ) {
         drawPath(
             path.value,
-            color = Color.Red,
+            color = colorState.value,
             style = Stroke(5f)
         )
     }

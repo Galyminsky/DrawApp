@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BottomPanel() {
+fun BottomPanel(onClick: (Color) -> Unit) {
 
     Column(
         modifier = Modifier
@@ -25,12 +25,15 @@ fun BottomPanel() {
             .background(Color.LightGray),
         horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-        ColorList()
+        ColorList() {
+                color ->
+            onClick(color)
+        }
     }
 }
 
 @Composable
-fun ColorList() {
+fun ColorList(onClick: (Color) -> Unit) {
     val colors = listOf(
         Color.Red,
         Color.Green,
@@ -52,6 +55,7 @@ fun ColorList() {
                 modifier = Modifier
                     .padding(10.dp)
                     .clickable {
+                        onClick(color)
                     }
                     .size(40.dp)
                     .background(color, CircleShape)
