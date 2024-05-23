@@ -1,6 +1,7 @@
 package me.proton.jobforandroid.drawapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -60,6 +61,13 @@ fun DrawCanvas(pathData: MutableState<PathData>) {
             detectDragGestures(
                 onDragStart = {
                     tempPath = Path()
+                },
+                onDragEnd = {
+                    pathList.add(
+                        pathData.value.copy(
+                            path = tempPath
+                        )
+                    )
                 }
             ) { change, dragAmount ->
                 tempPath.moveTo(
@@ -72,6 +80,9 @@ fun DrawCanvas(pathData: MutableState<PathData>) {
                     change.position.y
                 )
 
+                if (pathList.size > 0) {
+                    pathList.removeAt(pathList.size - 1)
+                }
                 pathList.add(
                     pathData.value.copy(
                         path = tempPath
@@ -88,5 +99,6 @@ fun DrawCanvas(pathData: MutableState<PathData>) {
                 style = Stroke(5f)
             )
         }
+        Log.d("MyLog", "Size: ${pathList.size}")
     }
 }
