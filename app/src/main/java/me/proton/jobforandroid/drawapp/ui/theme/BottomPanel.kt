@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -30,7 +32,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BottomPanel(onClick: (Color) -> Unit, onLineWidthChange: (Float) -> Unit) {
+fun BottomPanel(
+    onClick: (Color) -> Unit,
+    onLineWidthChange: (Float) -> Unit,
+    onBackClick: () -> Unit) {
 
     Column(
         modifier = Modifier
@@ -46,8 +51,9 @@ fun BottomPanel(onClick: (Color) -> Unit, onLineWidthChange: (Float) -> Unit) {
 
         }
         ButtonPanel {
-
+            onBackClick()
         }
+        Spacer(modifier = Modifier.height(5.dp))
     }
 }
 
