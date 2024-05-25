@@ -52,7 +52,10 @@ class MainActivity : ComponentActivity() {
                         }
                     )
                     {
-                        pathList.removeAt(pathList.size - 1)
+                        pathList.removeIf { pathD ->
+                            pathList[pathList.size - 1] == pathD
+
+                        }
                     }
                 }
             }

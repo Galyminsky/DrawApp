@@ -35,7 +35,8 @@ import androidx.compose.ui.unit.dp
 fun BottomPanel(
     onClick: (Color) -> Unit,
     onLineWidthChange: (Float) -> Unit,
-    onBackClick: () -> Unit) {
+    onBackClick: () -> Unit
+) {
 
     Column(
         modifier = Modifier
