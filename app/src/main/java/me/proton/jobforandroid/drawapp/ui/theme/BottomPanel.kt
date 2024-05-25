@@ -29,13 +29,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import me.proton.jobforandroid.drawapp.R
 
 @Composable
 fun BottomPanel(
     onClick: (Color) -> Unit,
     onLineWidthChange: (Float) -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onCapClick: (StrokeCap) -> Unit,
 ) {
 
     Column(
@@ -51,8 +55,10 @@ fun BottomPanel(
             onLineWidthChange(lineWidth)
 
         }
-        ButtonPanel {
+        ButtonPanel({
             onBackClick()
+        }) { cap ->
+            onCapClick(cap)
         }
         Spacer(modifier = Modifier.height(5.dp))
     }
@@ -110,25 +116,73 @@ fun CustomSlider(onChange: (Float) -> Unit) {
 }
 
 @Composable
-fun ButtonPanel(onClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 10.dp, end = 10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        IconButton(
+fun ButtonPanel(onClick: () -> Unit, onCapClick: (StrokeCap) -> Unit) {
+    Row(Modifier.fillMaxWidth()) {
+        Row(
             modifier = Modifier
-                .clip(CircleShape)
-                .background(Color.White),
-            onClick = {
-                onClick()
-            })
-        {
-            Icon(
-                Icons.Default.ArrowBack,
-                contentDescription = "Back"
-            )
+                .fillMaxWidth(0.5f)
+                .padding(start = 10.dp, end = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconButton(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(Color.White),
+                onClick = {
+                    onClick()
+                })
+            {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    contentDescription = "Back"
+                )
+            }
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(1f)
+                .padding(end = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconButton(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(Color.White),
+                onClick = {
+                    onCapClick(StrokeCap.Round)
+                })
+            {
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_1),
+                    contentDescription = "Back"
+                )
+            }
+            IconButton(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(Color.White),
+                onClick = {
+                    onCapClick(StrokeCap.Butt)
+                })
+            {
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_2),
+                    contentDescription = "Back"
+                )
+            }
+            IconButton(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(Color.White),
+                onClick = {
+                    onCapClick(StrokeCap.Square)
+                })
+            {
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_3),
+                    contentDescription = "Back"
+                )
+            }
         }
     }
 }
