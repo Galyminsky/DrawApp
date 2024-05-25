@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import me.proton.jobforandroid.drawapp.ui.theme.BottomPanel
@@ -103,7 +104,10 @@ fun DrawCanvas(pathData: MutableState<PathData>) {
             drawPath(
                 PathData.path,
                 color = PathData.color,
-                style = Stroke(PathData.lineWidth)
+                style = Stroke(
+                    PathData.lineWidth,
+                    cap = StrokeCap.Round
+                )
             )
         }
         Log.d("MyLog", "Size: ${pathList.size}")
