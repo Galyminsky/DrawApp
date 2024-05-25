@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BottomPanel(onClick: (Color) -> Unit) {
+fun BottomPanel(onClick: (Color) -> Unit, onLineWidthChange: (Float) -> Unit) {
 
     Column(
         modifier = Modifier
@@ -34,7 +34,10 @@ fun BottomPanel(onClick: (Color) -> Unit) {
         ColorList { color ->
             onClick(color)
         }
-        CustomSlider()
+        CustomSlider{lineWidth ->
+            onLineWidthChange(lineWidth)
+
+        }
     }
 }
 
@@ -73,7 +76,7 @@ fun ColorList(onClick: (Color) -> Unit) {
 }
 
 @Composable
-fun CustomSlider() {
+fun CustomSlider(onChange: (Float) -> Unit) {
     var position by remember {
         mutableFloatStateOf(0.05f)
     }
@@ -84,6 +87,7 @@ fun CustomSlider() {
             onValueChange = {
                 val tempPos = if (it > 0) it else 0.05f
                 position = tempPos
+                onChange(tempPos * 100)
             })
     }
 }

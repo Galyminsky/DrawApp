@@ -34,11 +34,18 @@ class MainActivity : ComponentActivity() {
             DrawAppTheme {
                 Column {
                     DrawCanvas(pathData)
-                    BottomPanel() { color ->
-                        pathData.value = pathData.value.copy(
-                            color = color
-                        )
-                    }
+                    BottomPanel(
+                        { color ->
+                            pathData.value = pathData.value.copy(
+                                color = color
+                            )
+                        },
+                        { lineWidth ->
+                            pathData.value = pathData.value.copy(
+                                lineWidth = lineWidth
+                            )
+                        }
+                    )
                 }
             }
         }
@@ -96,7 +103,7 @@ fun DrawCanvas(pathData: MutableState<PathData>) {
             drawPath(
                 PathData.path,
                 color = PathData.color,
-                style = Stroke(5f)
+                style = Stroke(PathData.lineWidth)
             )
         }
         Log.d("MyLog", "Size: ${pathList.size}")
