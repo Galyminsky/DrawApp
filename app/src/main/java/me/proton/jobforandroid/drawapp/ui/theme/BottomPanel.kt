@@ -15,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -78,13 +77,13 @@ fun CustomSlider() {
     var position by remember {
         mutableFloatStateOf(0.05f)
     }
-    Column (horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "Line wight $position")
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "Line wight ${(position * 100).toInt()}")
         Slider(
             value = position,
             onValueChange = {
                 val tempPos = if (it > 0) it else 0.05f
                 position = tempPos
-            } )
+            })
     }
 }
